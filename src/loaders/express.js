@@ -1,14 +1,24 @@
-const bodyParser = require('body-parser');
+(function (expressLoader) {
 
-const expressLoader = async ({ app }) => {
+  'use strict';
 
-  app.get('/status', (req, res) => { res.status(200).end(); });
-  app.head('/status', (req, res) => { res.status(200).end(); });
+  // *** dependencies *** //
+  const bodyParser = require('body-parser');
+  const routeConfig = require('../config/route-config.js');
 
-  app.use(require('morgan')('dev'));
-  app.use(bodyParser.urlencoded({ extended: false }));
+  expressLoader.init = async ({ app }) => {
 
-  return app;
-}
+    // *** healt check *** //
+    app.get('/status', (req, res) => { res.status(200).end(); });
+    app.head('/status', (req, res) => { res.status(200).end(); });
 
-module.exports = expressLoader;
+    // *** config *** //
+    app.use(require('morgan')('dev'));
+    app.use(bodyParser.urlencoded({ extended: false }));
+
+    routeConfig.init(app);
+
+    return app;
+  };
+
+})(module.exports);

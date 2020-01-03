@@ -1,22 +1,32 @@
-const loaders = require('./loaders');
-const express = require('express');
-const dotenv = require('dotenv');
+(function() {
 
-dotenv.config();
+  'use strict';
 
-async function startServer() {
+  // *** dependencies *** //
+  const loaders = require('./loaders');
+  const express = require('express');
+  const dotenv = require('dotenv');
 
+  // *** init *** //
+  dotenv.config();
   const app = express();
 
-  await loaders({ expressApp: app });
+  async function startServer() {
 
-  app.listen(process.env.PORT, err => {
-    if (err) {
-      console.log(err);
-      return;
-    }
-    console.log(`Your server is ready !`);
-  });
-}
+    // *** config *** //
+    await loaders.init({ expressApp: app });
 
-startServer();
+    app.listen(process.env.PORT, err => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      console.log(`Your server is ready !`);
+    });
+  }
+
+  startServer();
+
+  module.exports = app;
+
+}());
