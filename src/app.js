@@ -12,19 +12,11 @@
   const app = express();
 
   async function startServer() {
-
-    // *** config *** //
-    await loaders.init({ expressApp: app });
-
-    app.listen(process.env.PORT, err => {
-      if (err) {
-        console.log(err);
-        return;
-      }
-      console.log(`Your server is ready !`);
-    });
+    await loaders.initExpress({ expressApp: app });
+    var server = await loaders.startServer({ expressApp: app });
+    loaders.initSocket(server);
   }
-
+  
   startServer();
 
   module.exports = app;

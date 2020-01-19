@@ -1,24 +1,37 @@
-const databaseName = 'passport_local_knex';
-
 module.exports = {
   development: {
-    client: 'postgresql',
-    connection: `postgres://localhost:5432/${databaseName}`,
+    client: 'pg',
+    connection:'postgres://localhost/ufree',
     migrations: {
-      directory: __dirname + '/src/server/db/migrations'
+      directory: './src/db/migrations'
     },
     seeds: {
-      directory: __dirname + '/src/server/db/seeds'
-    }
+      directory: './src/db/seeds/dev'
+    },
+    useNullAsDefault: true
   },
+
   test: {
-    client: 'postgresql',
-    connection: `postgres://localhost:5432/${databaseName}_test`,
+    client: 'pg',
+    connection:'postgres://localhost/ufree_test',
     migrations: {
-      directory: __dirname + '/src/server/db/migrations'
+      directory: './src/db/migrations'
     },
     seeds: {
-      directory: __dirname + '/src/server/db/seeds'
-    }
+      directory: './src/db/seeds/test'
+    },
+    useNullAsDefault: true
+  },
+
+  production: {
+    client: 'pg',
+    connection: process.env.DATABASE_URL,
+    migrations: {
+      directory: './src/db/migrations'
+    },
+    seeds: {
+      directory: './src/db/seeds/production'
+    },
+    useNullAsDefault: true
   }
 };

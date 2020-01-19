@@ -16,7 +16,6 @@
       "confirm": false
     },
     "esversion": 8,
-    // "esnext": true,
     "node" : true,
     "browser" : true,
     "boss" : false,

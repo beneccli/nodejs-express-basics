@@ -6,9 +6,11 @@
 
     // *** routes *** //
     const routes = require('../api/index');
+    const authRoutes = require('../api/auth');
 
     // *** register routes *** //
     app.use('/', routes);
+    app.use('/auth', authRoutes);
 
   };
 
