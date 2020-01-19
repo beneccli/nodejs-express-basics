@@ -1,5 +1,5 @@
 {
-  "name": "ufree",
+  "name": "nodejs-express-basics",
   "version": "1.0.0",
   "description": "A way to offer airtable to all.",
   "main": "src/app.js",
