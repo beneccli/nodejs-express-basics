@@ -1,4 +1,4 @@
-const EventEmitter = require("events");
+const EventEmitter = require('events');
 
 const isUserInTarget = (user, target) => {
 
@@ -8,21 +8,21 @@ const isUserInTarget = (user, target) => {
   // Has target but no user found = refuse all
   else if (!user.id)
     return false;
-  // Target is integer = target is a specific user_id 
+  // Target is integer = target is a specific user_id
   else if (Number.isInteger(target))
-    return user.id == target;
-  // Target is array = target is a group of user_id 
+    return user.id === target;
+  // Target is array = target is a group of user_id
   else if (Array.isArray(target))
     return target.includes(user.id);
   // Target is a dictionary with definition
-  else if (target.constructor == Object && target.type && target.data)
-    if (target.type == 'users' && Array.isArray(target.data))
+  else if (target.constructor === Object && target.type && target.data)
+    if (target.type === 'users' && Array.isArray(target.data))
       return target.data.includes(user.id);
-    // if (target.type == 'roles' && Array.isArray(target.data))
-    //   return user.roles.includesOneOf(target.data);
+  // if (target.type == 'roles' && Array.isArray(target.data))
+  //   return user.roles.includesOneOf(target.data);
   // Could not understand the target properly, refuse for security purpose
   return false;
-}
+};
 
 module.exports = {
   localEvents: new EventEmitter(),
@@ -39,4 +39,3 @@ module.exports = {
     return true;
   }
 };
-

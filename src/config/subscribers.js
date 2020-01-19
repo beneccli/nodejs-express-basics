@@ -4,6 +4,6 @@
 
   loaders.socketSubscribers = [
     './socketTest.js'
-  ]
+  ];
 
 })(module.exports);

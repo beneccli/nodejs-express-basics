@@ -16,7 +16,7 @@
     var server = await loaders.startServer({ expressApp: app });
     loaders.initSocket(server);
   }
-  
+
   startServer();
 
   module.exports = app;

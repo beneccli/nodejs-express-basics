@@ -3,7 +3,7 @@
   'use strict';
 
   response.error = (res, statusCode, statusText, message, code) => {
-    // The response is filtered to avoid having any 'null' inside 
+    // The response is filtered to avoid having any 'null' inside
     let response = Object.fromEntries(Object.entries({
       statusCode: statusCode,
       error: statusText,
@@ -35,4 +35,3 @@
   };
 
 })(module.exports);
-  

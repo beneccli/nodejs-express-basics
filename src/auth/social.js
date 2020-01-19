@@ -15,7 +15,7 @@ init();
 const getUserFromProvider = (provider) => {
   return (accessToken, refreshToken, profile, cb) => {
     UsersService.getUserByProvider(provider, profile.id)
-    .then((user) => { 
+    .then((user) => {
       // Create user if he's signing for the first time
       if (!user) {
         return UsersService
@@ -30,7 +30,7 @@ const getUserFromProvider = (provider) => {
     .catch((err) => {
       return cb(err);
     });
-  }
+  };
 };
 
 // ** GITHUB Strategy

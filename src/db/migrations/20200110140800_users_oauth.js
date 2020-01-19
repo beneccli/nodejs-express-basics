@@ -20,10 +20,9 @@ exports.up = function(knex) {
     table.string('provider_user_id').notNullable();
     table.integer('user_id').unsigned().notNullable();
     table.timestamp('created_at').notNullable().defaultTo(knex.fn.now());
-    table.foreign('provider_id').references('id').inTable('oauth_providers').onDelete('CASCADE');;
-    table.foreign('user_id').references('id').inTable('users').onDelete('CASCADE');;
-  })
-  ;
+    table.foreign('provider_id').references('id').inTable('oauth_providers').onDelete('CASCADE');
+    table.foreign('user_id').references('id').inTable('users').onDelete('CASCADE');
+  });
 };
 
 exports.down = function(knex) {

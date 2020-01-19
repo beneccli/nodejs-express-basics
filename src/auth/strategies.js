@@ -9,16 +9,16 @@ init();
 // ** JWT Strategy
 const cookieExtractor = (req) => {
   if (req) {
-    const jwt = req.cookies['jwt']; // Head + Payload
+    const jwt = req.cookies.jwt; // Head + Payload
     const jwtSecure = req.cookies['jwt-secure']; // Signature
     if (jwt && jwtSecure)
       return `${jwt}.${jwtSecure}`;
   }
   return null;
 };
-opts = {
+const opts = {
   jwtFromRequest: ExtractJwt.fromExtractors([cookieExtractor, ExtractJwt.fromAuthHeaderAsBearerToken()]),
-  secretOrKey: process.env.SECRET_KEY,
+  secretOrKey: process.env.SECRET_KEY
   // opts.issuer = 'accounts.examplesoft.com';
   // opts.audience = 'yoursite.net';
 };

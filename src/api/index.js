@@ -9,7 +9,7 @@ router.get('/',
   passport.authenticate('jwt', { session: false, failureRedirect: '/visitor' }),
   (req, res) => {
     res.send(`<h3>Hello ${req.user.username}</h3><a href="/auth/signout">Sign out</a>`);
-});
+  });
 
 router.get('/visitor', (req, res) => {
   res.send('<h3>Hello visitor !</h3><a href="/auth/signin">Sign in</a>');
@@ -35,28 +35,16 @@ router.get('/jwt',
       page: 'jwt',
       user: req.user
     });
-  }
-);
+  });
 
 router.get('/event',
   loginRequired,
   function (req, res) {
-
     localEvents.emit('message', {
-      target: {
-        type: 'users',
-        data: [1,2]
-      },
+      target: { type: 'users', data: [1,2] },
       message: `Hello ${req.user.username}! ;)`
     });
-
-    res.json({
-      page: 'event',
-      user: req.user.username
-    });
-
-  }
-);
+    res.json({ page: 'event', user: req.user.username });
+  });
 
 module.exports = router;
-  

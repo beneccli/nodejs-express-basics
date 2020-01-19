@@ -7,7 +7,7 @@
 
   UsersService.getAll = () => {
     return knex('users');
-  }
+  };
 
   UsersService.getUserByProvider = async (provider_id, provider_user_id) => {
     return knex
@@ -16,8 +16,8 @@
     .andWhere('oauth_providers_users.provider_id', provider_id)
     .innerJoin('users', 'users.id', 'oauth_providers_users.user_id')
     .select('users.id', 'email', 'username', 'picture', 'admin')
-    .first()
-  }
+    .first();
+  };
 
   UsersService.createUserWithProvider = async (provider_id, provider_user_id, displayName) => {
     return knex.transaction(function (t) {
@@ -30,11 +30,11 @@
             return knex('oauth_providers_users')
               .transacting(t)
               .insert({ provider_id: provider_id, provider_user_id: provider_user_id, user_id: users[0].id })
-              .then(() => { return users[0]; })
+              .then(() => { return users[0]; });
           else
             throw new Error('No user has been created.');
         });
     });
-  }
-  
+  };
+
 })(module.exports);

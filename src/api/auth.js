@@ -4,11 +4,11 @@ const passportSocial = require('../auth/social');
 const login_required = require('../auth/strategies').authenticate('jwt', { session: false });
 const jwt = require('jsonwebtoken');
 
-const auth_from = (provider) => { return passportSocial.authenticate(provider, { failureRedirect: '/auth/signin' }) };
+const auth_from = (provider) => { return passportSocial.authenticate(provider, { failureRedirect: '/auth/signin' }); };
 const create_session = (req, res) => {
   // Generate jwt token
   let jwtSplit = jwt.sign(req.user, process.env.SECRET_KEY, { expiresIn: process.env.JWT_EXPIRATION }).split('.');
-  // Create javascript readable cookie containing head + payload 
+  // Create javascript readable cookie containing head + payload
   res.cookie('jwt', `${jwtSplit[0]}.${jwtSplit[1]}`);
   // Create javascript unreadable cookie containing signature
   res.cookie('jwt-secure', jwtSplit[2], { httpOnly: true, secure: false /* prod: secure: true, maxAge: 10000000000, signed: true */});
