@@ -8,7 +8,7 @@ const connectionHandler = (client) => {
 
   // ** Initialize user
   let user = null;
-  const cookies = cookie.parse(client.request.headers.cookie);
+  const cookies = cookie.parse(client.request.headers.cookie || '');
   const jsonwebtoken = (cookies.jwt && cookies['jwt-secure']) ? `${cookies.jwt}.${cookies['jwt-secure']}` : null;
   jwt.verify(jsonwebtoken, process.env.SECRET_KEY, (err, decoded) => { user = decoded; });
 
